@@ -1,9 +1,13 @@
 close all
 clear
 
-dirPath  = '..\..\cap-sleep-database-1.0.0\cap-sleep-database-1.0.0\';
+dirPath  = '..\cap-sleep-database-1.0.0\cap-sleep-database-1.0.0\';
 
-load PcaCoeffs.mat
+load PcaCoeffs1.mat
+load PcaCoeffs2.mat
+PcaCoeffs = [PcaCoeffs1, PcaCoeffs2];
+clear PcaCoeffs1;
+clear PcaCoeffs2;
 
 %%
 subIdx    = 2;
@@ -25,7 +29,7 @@ while line ~= -1
     line = fgetl(fId);
 end
 
-% vTimeIdx  = 500:1000;
+vTimeIdx  = 500:1000;
 vDuration = vDuration(vTimeIdx);
 vLabel    = vLabel(vTimeIdx);
 
@@ -36,7 +40,7 @@ Fs = 512;
 Ts = 1 / Fs;
 
 [hdr, mData] = edfread([dirPath, 'n2.edf']);
-% vSensorIdx   = [1, 2, 3, 4, 5, 8];
+vSensorIdx   = [1, 2, 3, 4, 5, 8];
 mData = mData(vSensorIdx,:);
 
 %% Notch
